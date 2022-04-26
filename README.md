@@ -1,7 +1,7 @@
 # Alignment Transitivity Merger (ATMerger)
 This is a standalone alignment merging tool that utilizes transitivity to merge a set of overlapping alignments. The original implementation comes from PASTA and UPP (see [original codes availibility](#original-codes-availability)). The core idea is that, if two alignments have some overlapping taxa, we could use them as "anchors" to link the two alignments together to form a larger alignment with the union of taxa from both.
 
-### Limitation
+### Limitations
 * Arbitrary merging of two alignments is not trivial, and this program is only designed to merge two or more alignments that share some sub-alignments. For example, if two alignments, each having 501 taxa, share exactly a sub-alignment of size 500, we can use this merger to merge them together to form a 502-taxa alignment.
 * Additionally, the order of merging is important, if not all alignments are overlapping. For example, if two non-overlapping alignments are attempted to be merged together, the outcome alignment will be entirely gapped between the two sets of taxa. Any additional alignment information that connects these taxa will not be able to override.
 
