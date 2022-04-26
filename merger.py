@@ -7,8 +7,8 @@ is exactly the same one from PASTA and UPP (by transitivity).
 
 import os, sys, re
 import time
-from alignment_tools import Alignment, read_fasta, \
-        CompactAlignment, compact 
+import argparse
+from utility import Alignment, CompactAlignment, compact 
 from concurrent.futures.process import ProcessPoolExecutor
 from math import ceil
 
@@ -61,10 +61,16 @@ def dummy():
     pass
 
 def main():
-    assert len(sys.argv) == 4
-    indir = sys.argv[1]
-    outpath = sys.argv[2]
-    t = int(sys.argv[3])
+    parser = argparse.ArgumentParser(description='Merge a set of overlapping'
+            ' alignments')
+    parser.add_argument('-d', '--indir', required=True, type=str,
+            help='the directory that contains only the overlapping alignments')
+    parser.add_argument('-o', '--outpath', required=True, type=str,
+            help='the merged alignment output destination')
+    parser.add_argument('-t', '--cores', required=False, type=int, default=1,
+            help='the number of cores to use for multi-processing (default: 1)')
+    args = parser.parse_args()
+    indir, outpath, t = args.indir, args.outpath, int(args.cores)
 
     pool = ProcessPoolExecutor(t)
     _ = pool.submit(dummy)
