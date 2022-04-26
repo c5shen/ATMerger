@@ -8,6 +8,7 @@ Arbitrary merging of two alignments is not trivial, and this program is only des
 1. A list of overlapping alignments to merge (all alignments need to overlap with each other on some taxa)
 2. The output file path
 3. The number of cores (for the purpose of multi-processing)
+4. (Optional) a file stating the specific order that the merging should occur
 
 
 # Usage
@@ -16,14 +17,19 @@ $ python3 merger.py -d [directory with only input alignments] -o [output path] -
 ```
 Use `python3 merger.py -h` to see more details.
 
-### Example
+#### Example 1
 ```bash
-$ python3 merger.py -d examples/data -o merged.fasta -t 1
+$ python3 merger.py -d examples/exp1 -o exp1.fasta -t 1
+```
+
+#### Example 2
+```bash
+$ python3 merger.py -d examples/exp2 --order examples/exp2_order.txt -o exp2.fasta -t 1
 ```
 
 # I am working on ...
-1. Allowing users to specify the merging order of alignments. This should eliminate the issue with not all alignments having overlapping compartments (e.g., a set of alignments obtained by neighbor pairs of nodes in a spanning tree, each node representing a cluster of taxa).
-2. In the case of 1, the merger should operate in sequential order (no multi-processing).
+1. (DONE) Allowing users to specify the merging order of alignments. This should eliminate the issue with not all alignments having overlapping compartments (e.g., a set of alignments obtained by neighbor pairs of nodes in a spanning tree, each node representing a cluster of taxa).
+2. (COROLLARILY DONE) In the case of 1, the merger should operate in sequential order (no multi-processing).
 
 # Original Codes Availability
 1. [PASTA](https://github.com/smirarab/pasta) (see `pasta/alignment.py`)
