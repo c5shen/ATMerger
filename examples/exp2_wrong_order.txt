@@ -1,0 +1,3 @@
+s1.fasta
+s3.fasta
+s2.fasta
