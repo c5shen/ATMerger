@@ -9,7 +9,13 @@ A standalone alignment merging tool that utilizes transitivity that merges a set
 
 # Usage
 ```bash
-$ python3 merger.py [directory with only input alignments] [output path] [number of cores]
+$ python3 merger.py -d [directory with only input alignments] -o [output path] -t [number of cores]
+```
+Use `python3 merger.py -h` to see more details.
+
+### Example
+```bash
+$ python3 merger.py -d examples/data -o merged.fasta -t 1
 ```
 
 # I am working on ...
