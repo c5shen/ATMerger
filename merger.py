@@ -95,7 +95,6 @@ def main():
                     inpaths = ['{}/{}'.format(indir, x) for x in lines]
                 else:
                     inpaths = lines
-    print(inpaths)
     start = time.time()
     if t > 1:
         pool = ProcessPoolExecutor(t)
