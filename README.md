@@ -1,8 +1,9 @@
-# Alignment Transitivity Merger
+# Alignment Transitivity Merger (ATMerger)
 This is a standalone alignment merging tool that utilizes transitivity to merge a set of overlapping alignments. The original implementation comes from PASTA and UPP (see [original codes availibility](#original-codes-availability)). The core idea is that, if two alignments have some overlapping taxa, we could use them as "anchors" to link the two alignments together to form a larger alignment with the union of taxa from both.
 
 ### Limitation
-Arbitrary merging of two alignments is not trivial, and this program is only designed to merge two or more alignments that share some sub-alignments. For example, if two alignments, each having 501 taxa, share exactly a sub-alignment of size 500, we can use this merger to merge them together to form a 502-taxa alignment.
+* Arbitrary merging of two alignments is not trivial, and this program is only designed to merge two or more alignments that share some sub-alignments. For example, if two alignments, each having 501 taxa, share exactly a sub-alignment of size 500, we can use this merger to merge them together to form a 502-taxa alignment.
+* Additionally, the order of merging is important, if not all alignments are overlapping. For example, if two non-overlapping alignments are attempted to be merged together, the outcome alignment will be entirely gapped between the two sets of taxa. Any additional alignment information that connects these taxa will not be able to override.
 
 # Inputs
 1. A list of overlapping alignments to merge (all alignments need to overlap with each other on some taxa)
@@ -22,10 +23,16 @@ Use `python3 merger.py -h` to see more details.
 $ python3 merger.py -d examples/exp1 -o exp1.fasta -t 1
 ```
 
-#### Example 2
+#### Example 2 (i.e., given specific merging order)
 ```bash
 $ python3 merger.py -d examples/exp2 --order examples/exp2_order.txt -o exp2.fasta -t 1
 ```
+
+#### Example 2 wrong order
+```bash
+$ python3 merger.py -d examples/exp2 --order examples/exp2_wrong_order.txt -o exp2_wrong.fasta -t 1
+```
+
 
 # I am working on ...
 1. (DONE) Allowing users to specify the merging order of alignments. This should eliminate the issue with not all alignments having overlapping compartments (e.g., a set of alignments obtained by neighbor pairs of nodes in a spanning tree, each node representing a cluster of taxa).
